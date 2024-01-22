@@ -1,0 +1,19 @@
+{
+  "name": "phonebook",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrishi135/fullstackopen.part3.git"
+  },
+  "author": "Hrishikesh Hegishte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrishi135/fullstackopen.part3/issues"
+  },
+  "homepage": "https://github.com/hrishi135/fullstackopen.part3#readme"
+}
