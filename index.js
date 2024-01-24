@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-const morgan = require('morgan')
+// const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
 const app = express()
@@ -48,10 +48,10 @@ app.post('/api/persons', (request, response, next) => {
   })
 
   newPerson.save()
-  .then(savedPerson => {
-    response.json(savedPerson)
-  })
-  .catch(error => next(error))
+    .then(savedPerson => {
+      response.json(savedPerson
+      )})
+    .catch(error => next(error))
   
 })
 
@@ -76,7 +76,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 })
 
 app.get('/info', async (request, response) => {
-  const count = await Person.countDocuments({}).exec();
+  const count = await Person.countDocuments({}).exec()
   const htmlString = `
     <!DOCTYPE html>
     <html lang="en">
@@ -90,28 +90,28 @@ app.get('/info', async (request, response) => {
           ${Date()}
       </div>
     </body>
-    </html>`;
-    response.send(htmlString)
+    </html>`
+  response.send(htmlString)
 })
 
-  const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-  }
-  // handler of requests with unknown endpoint
-  app.use(unknownEndpoint)
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+// handler of requests with unknown endpoint
+app.use(unknownEndpoint)
 
-  const errorHandler = (error, request, response, next) => {
-    console.error(error.message)
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
   
-    if (error.name === 'CastError') {
-      return response.status(400).send({ error: 'malformatted id' })
-    } else if (error.name === 'ValidationError') {
-      return response.status(400).json({ error: error.message })
-    }
-    next(error)
-  }  
-  // this has to be the last loaded middleware.
-  app.use(errorHandler)
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
+  next(error)
+}  
+// this has to be the last loaded middleware.
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
