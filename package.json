@@ -22,7 +22,9 @@
   "homepage": "https://github.com/hrishi135/fullstackopen.part3#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
     "express": "^4.18.2",
+    "mongoose": "^8.1.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
