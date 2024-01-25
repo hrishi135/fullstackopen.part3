@@ -37,8 +37,8 @@ app.post('/api/persons', (request, response, next) => {
   const person = request.body
 
   if (!person.name || !person.number) {
-    return response.status(400).json({ 
-      error: 'content missing' 
+    return response.status(400).json({
+      error: 'content missing'
     })
   }
 
@@ -52,15 +52,14 @@ app.post('/api/persons', (request, response, next) => {
       response.json(savedPerson
       )})
     .catch(error => next(error))
-  
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const {name, number} = request.body
+  const { name, number } = request.body
 
-  Person.findByIdAndUpdate(request.params.id, 
-    {name, number}, 
-    {new: true, runValidators: true, context: 'query'})
+  Person.findByIdAndUpdate(request.params.id,
+    { name, number },
+    { new: true, runValidators: true, context: 'query' })
     .then(updatedNote => {
       response.json(updatedNote)
     })
@@ -102,14 +101,14 @@ app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
-  
+
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
   }
   next(error)
-}  
+}
 // this has to be the last loaded middleware.
 app.use(errorHandler)
 
